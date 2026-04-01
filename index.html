@@ -763,7 +763,7 @@
         { value:"通常タイプ【NAME】（＋0円）", price:0, imageBase:"en-type-normal" }
       ],
       "その他": [
-        { value:"その他言語用【表記に応じて作成】（＋0円）", price:0 }
+        { value:"その他言語用【表記に応じて作成】（＋0円）", price:0, imageBase:"jp-type-normal" }
       ]
     };
 
@@ -779,7 +779,7 @@
         { value:"おまかせ", note:"現在はおまかせのみ / ※順次追加予定", imageBase:"en-font" }
       ],
       "その他": [
-        { value:"おまかせ", note:"現在はおまかせのみ / ※順次追加予定" }
+        { value:"おまかせ", note:"現在はおまかせのみ / ※順次追加予定", imageBase:"jp-font" }
       ]
     };
 
@@ -1053,9 +1053,9 @@
       let base = null;
 
       if(item.imageBaseMap){
-        base = item.imageBaseMap[language] || null;
+        base = item.imageBaseMap[language] || (language === "その他" ? (item.imageBaseMap["日本語"] || null) : null);
       }else if(item.onlyJapanese){
-        base = language === "日本語" ? (item.imageBase || null) : null;
+        base = (language === "日本語" || language === "その他") ? (item.imageBase || null) : null;
       }else{
         base = item.imageBase || null;
       }
