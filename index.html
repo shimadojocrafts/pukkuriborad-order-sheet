@@ -552,6 +552,12 @@
             <div class="checkgrid" id="finishGrid"></div>
           </div>
 
+          <div class="field hidden" id="illustrationDetailBlock">
+            <label class="label req" for="illustrationDetail">イラストの詳細</label>
+            <textarea id="illustrationDetail" rows="4" placeholder="例：くま / うさぎ / リボン付きハート / 星と月 など"></textarea>
+            <div class="help">※「イラスト」を選んだ場合のみご入力ください。</div>
+          </div>
+
           <div class="field" id="jpAddonBlock">
             <label class="label">文字追加オプション（日本語のみ / 複数選択可）</label>
             <div class="grid three" id="jpAddonGrid"></div>
@@ -686,7 +692,7 @@
               【納品後特典】<br>
               1媒体メンション投稿：<br>次回BASE限定 200円OFFクーポン<br>
               2媒体メンション投稿：<br>次回BASE限定 300円OFFクーポン<br>
-              3媒体メンション投稿：<br>次回BASE限定 500円OFFクーポン＋装飾メニュー1つ無料
+              3媒体メンション投稿：<br>次回BASE限定 500円OFFクーポン
             </div>
           </div>
         </section>
@@ -841,7 +847,7 @@
       { value:"フチ装飾 雲（＋200円）", price:200, group:"decor" },
       { value:"フチ装飾 キラキラ（＋200円）", price:200, group:"decor" },
       { value:"フチ装飾 ハート（＋200円）", price:200, group:"decor" },
-      { value:"フチ装飾 ハート2倍（＋300円）", price:1000, group:"decor" }
+      { value:"フチ装飾 ハート2倍（＋300円）", price:300, group:"decor" }
     ];
 
     const FINISH_OPTIONS = [
@@ -852,7 +858,8 @@
       { value:"フチ②グラデーション（＋200円）", price:200, key:"fringe2Gradient", allowed:["normal","thickInner","thickOuter","extra1","extra2"], group:"finish", fringeNo:2, imageBaseMap:{ "日本語":"jp-finish-fringe2-gradient", "韓国語（ハングル）":"kr-finish-fringe2-gradient", "英語":"en-finish-fringe2-gradient" } },
       { value:"フチ③グラデーション（＋200円）", price:200, key:"fringe3Gradient", allowed:["extra1","extra2"], group:"finish", fringeNo:3, imageBaseMap:{ "日本語":"jp-finish-fringe3-gradient", "韓国語（ハングル）":"kr-finish-fringe3-gradient", "英語":"en-finish-fringe3-gradient" } },
       { value:"フチ④グラデーション（＋200円）", price:200, key:"fringe4Gradient", allowed:["extra2"], group:"finish", fringeNo:4, imageBaseMap:{ "日本語":"jp-finish-fringe4-gradient", "韓国語（ハングル）":"kr-finish-fringe4-gradient", "英語":"en-finish-fringe4-gradient" } },
-      { value:"キルティング（フチ最外層）（＋500円）", price:500, key:"quilting", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-quilting", "韓国語（ハングル）":"kr-finish-quilting", "英語":"en-finish-quilting" } }
+      { value:"キルティング（フチ最外層）（＋500円）", price:500, key:"quilting", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-quilting", "韓国語（ハングル）":"kr-finish-quilting", "英語":"en-finish-quilting" } },
+      { value:"イラスト", price:0, priceLabel:"応相談", key:"illustration", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish" }
     ];
 
     const JP_ADDON_OPTIONS = [
@@ -866,7 +873,7 @@
     const TEXTURE_OPTIONS = [
       { value:"マット（＋0円）", price:0, chartBase:"color-chart-matte", imageBaseMap:{ "日本語":"jp-texture-matte", "韓国語（ハングル）":"kr-texture-matte", "英語":"en-texture-matte" } },
       { value:"マットメタリック（＋0円）", price:0, chartBase:"color-chart-matte-metal", imageBaseMap:{ "日本語":"jp-texture-matte-metal", "韓国語（ハングル）":"kr-texture-matte-metal", "英語":"en-texture-matte-metal" } },
-      { value:"つや（＋0円）", price:0, chartBase:"color-chart-tsuya", imageBaseMap:{ "日本語":"jp-texture-tsuya", "韓国語（ハングル）":"kr-texture-tsuya", "英語":"en-texture-tsuya" } },
+      { value:"つや（＋100円）", price:100, chartBase:"color-chart-tsuya", imageBaseMap:{ "日本語":"jp-texture-tsuya", "韓国語（ハングル）":"kr-texture-tsuya", "英語":"en-texture-tsuya" } },
       { value:"うるつや（＋100円）", price:100, chartBase:"color-chart-uru-tsuya", imageBaseMap:{ "日本語":"jp-texture-uru-tsuya", "韓国語（ハングル）":"kr-texture-uru-tsuya", "英語":"en-texture-uru-tsuya" } },
       { value:"つやメタリック（＋200円）", price:200, chartBase:"color-chart-tsuya-metal", imageBaseMap:{ "日本語":"jp-texture-tsuya-metal", "韓国語（ハングル）":"kr-texture-tsuya-metal", "英語":"en-texture-tsuya-metal" } }
     ];
@@ -888,7 +895,7 @@
           <span class="card">
             <div class="mini lang-sample">日本語用サンプル画像を差し替え</div>
             <span class="title">${item.value.replace(/（[＋\+]\d+円）/g,"").replace("（＋0円）","").replace("（+0円）","")}</span>
-            <span class="price">${yen(item.price ?? 0)}</span>
+            <span class="price">${item.priceLabel ?? yen(item.price ?? 0)}</span>
           </span>
         `;
         target.appendChild(wrap);
@@ -975,12 +982,15 @@
       list.forEach((item) => {
         const wrap = document.createElement("label");
         wrap.className = "choice";
+        const imageMarkup = item.key === "illustration"
+          ? ""
+          : languageImageMarkup(item, "日本語以外の画像はあとから差し替え");
         wrap.innerHTML = `
           <input type="checkbox" name="${name}" value="${item.value}" data-price="${item.price ?? 0}" ${item.key ? `data-key="${item.key}"` : ""} ${item.group ? `data-group="${item.group}"` : ""} ${item.fringeNo ? `data-fringe-no="${item.fringeNo}"` : ""}>
           <span class="card">
-            ${languageImageMarkup(item, "日本語以外の画像はあとから差し替え")}
+            ${imageMarkup}
             <span class="title">${item.value.replace(/（[＋\+]\d+円）/g,"").replace("（＋0円）","").replace("（+0円）","")}</span>
-            <span class="price">${yen(item.price ?? 0)}</span>
+            <span class="price">${item.priceLabel ?? yen(item.price ?? 0)}</span>
           </span>
         `;
         target.appendChild(wrap);
@@ -1242,6 +1252,12 @@
       if(finishDecorSelected && finishNone?.checked) finishNone.checked = false;
       if(!finishDecorSelected && !finishNone?.checked) finishNone.checked = true;
 
+      const showIllustrationDetail = finishChecks.some(el => (el.value || "").startsWith("イラスト") && el.checked);
+      $("#illustrationDetailBlock").classList.toggle("hidden", !showIllustrationDetail);
+      if(!showIllustrationDetail){
+        $("#illustrationDetail").value = "";
+      }
+
       updateColorHints();
 
       // mention "難しい / 未定" exclusivity
@@ -1428,6 +1444,10 @@
         items.push({label:"フチ加工", value:finishValues.join(" / "), price:getCheckedPrices("finish")});
       }
 
+      if(finishValues.some(v => v.startsWith("イラスト")) && $("#illustrationDetail").value.trim()){
+        items.push({label:"イラストの詳細", value:$("#illustrationDetail").value.trim(), price:0});
+      }
+
       if(language === "日本語"){
         const jpAddonValues = getCheckedValues("jpAddon");
         const jpAddonPrice = getCheckedPrices("jpAddon");
@@ -1470,6 +1490,7 @@
             4: $("#fringeColor4").value.trim()
           },
           edgeColor: $("#edgeColor").value.trim(),
+          illustrationDetail: $("#illustrationDetail").value.trim(),
           memo: $("#memo").value.trim()
         }
       };
@@ -1487,6 +1508,7 @@
         if(!state.form.fringeColors[i]) missing.push(`フチ色${i}`);
       }
       if(state.baseCode === "thickOuter" && state.edgeDecorValues.length && !state.form.edgeColor) missing.push("フチ装飾のお色");
+      if(state.finishValues.some(v => v.startsWith("イラスト")) && !state.form.illustrationDetail) missing.push("イラストの詳細");
       if(state.confirmation.length < 4) missing.push("確認事項");
       return missing;
     }
