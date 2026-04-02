@@ -885,6 +885,25 @@
       return `¥${num.toLocaleString("ja-JP")}`;
     }
 
+    function updateGiftPriceDisplay(){
+      const isGift = getCheckedValue("orderType") === "gift";
+      $$(".choice").forEach(choice => {
+        const input = choice.querySelector("input");
+        const priceEl = choice.querySelector(".card .price");
+        if(!input || !priceEl) return;
+
+        if(!priceEl.dataset.normalText){
+          priceEl.dataset.normalText = priceEl.textContent;
+        }
+
+        if(input.name === "orderType"){
+          priceEl.textContent = priceEl.dataset.normalText;
+        }else{
+          priceEl.textContent = isGift ? "¥0" : priceEl.dataset.normalText;
+        }
+      });
+    }
+
     function buildRadioCards(target, name, list, defaultIndex = 0){
       target.innerHTML = "";
       list.forEach((item, idx) => {
@@ -1234,6 +1253,10 @@
           visible = cfg.fringeNo <= fringeCount;
         }
 
+        if(orderType === "gift" && cfg?.key === "illustration"){
+          visible = false;
+        }
+
         label.classList.toggle("hidden", !visible);
         if(!visible){ input.checked = false; }
       });
@@ -1463,6 +1486,11 @@
       total += getCheckedPrice("snsPermit");
       items.push({label:"SNS掲載可否", value:getCheckedValue("snsPermit"), price:getCheckedPrice("snsPermit")});
 
+      if(orderType === "gift"){
+        total = 0;
+        items.forEach(item => item.price = 0);
+      }
+
       return {
         total,
         items,
@@ -1515,6 +1543,7 @@
 
     function updateSummary(){
       refreshConditionalUI();
+      updateGiftPriceDisplay();
       const state = collectState();
       const missing = validate(state);
 
