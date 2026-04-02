@@ -560,7 +560,16 @@
         </section>
 
         <section class="section">
-          <h2>7. 色指定</h2>
+          <h2>7. 表面テクスチャ</h2>
+
+          <div class="field">
+            <label class="label req">ご希望の表面テクスチャ</label>
+            <div class="grid three" id="textureGrid"></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>8. 色指定</h2>
 
           <div class="field">
             <label class="label">カラーチャート</label>
@@ -619,15 +628,6 @@
             <label class="label req" for="edgeColor">フチ装飾のお色</label>
             <input id="edgeColor" type="text" placeholder="例：A-1">
             <div class="help">※フチ装飾を追加した場合のみ<br>ご入力ください。</div>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2>8. 表面テクスチャ</h2>
-
-          <div class="field">
-            <label class="label req">ご希望の表面テクスチャ</label>
-            <div class="grid three" id="textureGrid"></div>
           </div>
         </section>
 
@@ -846,11 +846,11 @@
     ];
 
     const TEXTURE_OPTIONS = [
-      { value:"マット（＋0円）", price:0, imageBaseMap:{ "日本語":"jp-texture-matte", "韓国語（ハングル）":"kr-texture-matte", "英語":"en-texture-matte" } },
-      { value:"マットメタリック（＋0円）", price:0, imageBaseMap:{ "日本語":"jp-texture-matte-metal", "韓国語（ハングル）":"kr-texture-matte-metal", "英語":"en-texture-matte-metal" } },
-      { value:"つや（＋0円）", price:0, imageBaseMap:{ "日本語":"jp-texture-tsuya", "韓国語（ハングル）":"kr-texture-tsuya", "英語":"en-texture-tsuya" } },
-      { value:"うるつや（＋100円）", price:100, imageBaseMap:{ "日本語":"jp-texture-uru-tsuya", "韓国語（ハングル）":"kr-texture-uru-tsuya", "英語":"en-texture-uru-tsuya" } },
-      { value:"つやメタリック（＋200円）", price:200, imageBaseMap:{ "日本語":"jp-texture-tsuya-metal", "韓国語（ハングル）":"kr-texture-tsuya-metal", "英語":"en-texture-tsuya-metal" } }
+      { value:"マット（＋0円）", price:0, chartBase:"color-chart-matte", imageBaseMap:{ "日本語":"jp-texture-matte", "韓国語（ハングル）":"kr-texture-matte", "英語":"en-texture-matte" } },
+      { value:"マットメタリック（＋0円）", price:0, chartBase:"color-chart-matte-metal", imageBaseMap:{ "日本語":"jp-texture-matte-metal", "韓国語（ハングル）":"kr-texture-matte-metal", "英語":"en-texture-matte-metal" } },
+      { value:"つや（＋0円）", price:0, chartBase:"color-chart-tsuya", imageBaseMap:{ "日本語":"jp-texture-tsuya", "韓国語（ハングル）":"kr-texture-tsuya", "英語":"en-texture-tsuya" } },
+      { value:"うるつや（＋100円）", price:100, chartBase:"color-chart-uru-tsuya", imageBaseMap:{ "日本語":"jp-texture-uru-tsuya", "韓国語（ハングル）":"kr-texture-uru-tsuya", "英語":"en-texture-uru-tsuya" } },
+      { value:"つやメタリック（＋200円）", price:200, chartBase:"color-chart-tsuya-metal", imageBaseMap:{ "日本語":"jp-texture-tsuya-metal", "韓国語（ハングル）":"kr-texture-tsuya-metal", "英語":"en-texture-tsuya-metal" } }
     ];
 
     const $ = sel => document.querySelector(sel);
@@ -1011,6 +1011,7 @@
       buildTextureCards($("#textureGrid"), "texture", TEXTURE_OPTIONS);
       syncTypeAndFont();
       refreshConditionalUI();
+      updateTextureChart();
       updateSummary();
     }
 
@@ -1082,6 +1083,31 @@
 
     function textureImageMarkup(item){
       return languageImageMarkup(item, "日本語以外の画像はあとから差し替え");
+    }
+
+    function updateTextureChart(){
+      const selected = getCheckedValue("texture");
+      const cfg = TEXTURE_OPTIONS.find(x => x.value === selected);
+      const box = $("#textureChartBox");
+      if(!box) return;
+
+      if(!cfg?.chartBase){
+        box.innerHTML = `<div class="mini" style="min-height:180px;">テクスチャを選ぶと表示されます</div>`;
+        return;
+      }
+
+      const base = cfg.chartBase;
+      box.innerHTML = `
+        <img src="画像/${escapeHtml(base)}.png"
+             alt="${escapeHtml(base)}"
+             loading="lazy"
+             onerror="
+               if(!this.dataset.tryjpg){this.dataset.tryjpg='1';this.src='画像/${escapeHtml(base)}.jpg';}
+               else if(!this.dataset.tryjpeg){this.dataset.tryjpeg='1';this.src='画像/${escapeHtml(base)}.jpeg';}
+               else if(!this.dataset.trywebp){this.dataset.trywebp='1';this.src='画像/${escapeHtml(base)}.webp';}
+               else {this.outerHTML='<div class=\'mini\' style=\'min-height:180px;\'>画像/${escapeHtml(base)} を確認</div>';}
+             ">
+      `;
     }
 
     function updateLanguagePlaceholders(){
@@ -1231,9 +1257,12 @@
       total += ORDER_TYPE_PRICE[orderType];
       items.push({label:"ご依頼内容", value: orderType === "data" ? "オーダー購入【データでのお渡し】" : orderType === "physical" ? "オーダー購入【現物郵送お渡し】" : "プレゼント企画当選者", price: ORDER_TYPE_PRICE[orderType]});
 
+      const arrivalDate = $("#arrivalDate").value;
+      const useDate = $("#useDate").value.trim();
+
       if(orderType !== "gift"){
-        items.push({label:"到着希望日", value: state.form.arrivalDate || "未入力", price:0});
-        items.push({label:"使用日・イベント名", value: state.form.useDate || "なし", price:0});
+        items.push({label:"到着希望日", value: arrivalDate || "未入力", price:0});
+        items.push({label:"使用日・イベント名", value: useDate || "なし", price:0});
       }
 
       if(physical){
@@ -1290,8 +1319,8 @@
           customerName: $("#customerName").value.trim(),
           contactPlatform: getCheckedValue("contactPlatform"),
           customerId: $("#customerId").value.trim(),
-          arrivalDate: $("#arrivalDate").value,
-          useDate: $("#useDate").value.trim(),
+          arrivalDate: arrivalDate,
+          useDate: useDate,
           textValue: $("#textValue").value.trim(),
           font: getCheckedValue("font"),
           textColor: $("#textColor").value.trim(),
@@ -1413,6 +1442,10 @@
     document.addEventListener("change", (e) => {
       if(e.target.name === "language"){
         syncTypeAndFont();
+      }
+
+      if(e.target.name === "texture"){
+        updateTextureChart();
       }
 
       if(e.target.name === "jpAddon" && e.target.checked){
