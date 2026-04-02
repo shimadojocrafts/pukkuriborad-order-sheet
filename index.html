@@ -573,19 +573,29 @@
 
           <div class="field">
             <label class="label">カラーチャート</label>
-            <div class="sample-image-box" style="min-height:180px;">
-              <img src="画像/color-chart.png"
-                   alt="color-chart"
-                   loading="lazy"
-                   onerror="
-                     if(!this.dataset.tryjpg){this.dataset.tryjpg='1';this.src='画像/color-chart.jpg';}
-                     else if(!this.dataset.tryjpeg){this.dataset.tryjpeg='1';this.src='画像/color-chart.jpeg';}
-                     else if(!this.dataset.trywebp){this.dataset.trywebp='1';this.src='画像/color-chart.webp';}
-                     else {this.outerHTML='<div class=\'mini\' style=\'min-height:180px;\'>画像/color-chart を確認</div>';}
-                   ">
+            <div class="grid two">
+              <div>
+                <div class="help" style="margin:0 0 8px;">平面のカラーチャート</div>
+                <div class="sample-image-box" style="min-height:180px;">
+                  <img src="画像/color-chart-flat.png"
+                       alt="color-chart-flat"
+                       loading="lazy"
+                       onerror="
+                         if(!this.dataset.tryjpg){this.dataset.tryjpg='1';this.src='画像/color-chart-flat.jpg';}
+                         else if(!this.dataset.tryjpeg){this.dataset.tryjpeg='1';this.src='画像/color-chart-flat.jpeg';}
+                         else if(!this.dataset.trywebp){this.dataset.trywebp='1';this.src='画像/color-chart-flat.webp';}
+                         else {this.outerHTML='<div class=\'mini\' style=\'min-height:180px;\'>画像/color-chart-flat を確認</div>';}
+                       ">
+                </div>
+              </div>
+
+              <div>
+                <div class="help" style="margin:0 0 8px;">選択中テクスチャのカラーチャート</div>
+                <div id="textureChartBox" class="sample-image-box" style="min-height:180px;">
+                  <div class="mini" style="min-height:180px;">テクスチャを選ぶと表示されます</div>
+                </div>
+              </div>
             </div>
-            
-          </div>
 
           <div class="field">
             <label class="label req" for="textColor">文字色</label>
