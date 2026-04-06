@@ -1172,6 +1172,16 @@
       });
     }
 
+    function rebuildEdgeDecorationGrid(){
+      const selected = getCheckedValues("edgeDecor");
+      buildCheckCards($("#edgeDecorationGrid"), "edgeDecor", EDGE_DECOR_OPTIONS);
+      $$('input[name="edgeDecor"]').forEach(el => {
+        if(selected.includes(el.value)){
+          el.checked = true;
+        }
+      });
+    }
+
     function syncTypeAndFont(){
       const language = getCheckedValue("language");
       buildTypeCards($("#typeGrid"), "type", TYPE_OPTIONS[language] || TYPE_OPTIONS["日本語"]);
@@ -1181,6 +1191,7 @@
       const fontOptions = FONT_OPTIONS[language] || FONT_OPTIONS["日本語"];
       $("#fontHint").textContent = fontOptions.map(x => x.note).filter(Boolean).join(" / ");
       buildBaseCards($("#baseGrid"), "baseMenu", BASE_OPTIONS);
+      rebuildEdgeDecorationGrid();
       buildTextureCards($("#textureGrid"), "texture", TEXTURE_OPTIONS);
       buildFinishCards($("#finishGrid"), "finish", FINISH_OPTIONS);
       buildJPAddonCards($("#jpAddonGrid"), "jpAddon", JP_ADDON_OPTIONS);
@@ -1644,6 +1655,10 @@
 
       if(e.target.name === "texture"){
         updateTextureChart();
+      }
+
+      if(e.target.name === "baseMenu"){
+        rebuildEdgeDecorationGrid();
       }
 
       if(e.target.name === "jpAddon" && e.target.checked){
