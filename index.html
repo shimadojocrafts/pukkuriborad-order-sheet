@@ -467,27 +467,27 @@
               <label class="label req">サイズ</label>
               <div class="grid">
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="L版1/2サイズ（おおよそ名刺サイズ相当）（＋1500円）" data-price="1500" checked>
+                  <input type="radio" name="physicalSize" value="①L判1/2サイズ（おおよそ名刺サイズ相当）（＋1500円）" data-price="1500" checked>
                   <span class="card">
-                    <span class="title">L版1/2サイズ</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="desc">おおよそ名刺サイズ相当</span><span class="price">+¥1,500</span>
+                    <span class="title">①L判1/2サイズ</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="desc">おおよそ名刺サイズ相当</span><span class="price">+¥1,500</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="L版写真用紙（＋1500円）" data-price="1500">
+                  <input type="radio" name="physicalSize" value="②L判写真用紙（＋1500円）" data-price="1500">
                   <span class="card">
-                    <span class="title">L版写真用紙</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="price">+¥1,500</span>
+                    <span class="title">②L判写真用紙</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="price">+¥1,500</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="A4光沢紙（＋3000円）" data-price="3000">
+                  <input type="radio" name="physicalSize" value="③A4光沢紙（＋3000円）" data-price="3000">
                   <span class="card">
-                    <span class="title">A4光沢紙</span><span class="desc">印刷する用紙サイズ（210×297mm）</span><span class="price">+¥3,000</span>
+                    <span class="title">③A4光沢紙</span><span class="desc">印刷する用紙サイズ（210×297mm）</span><span class="price">+¥3,000</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="A4光沢紙2枚分 連結用（A3サイズ相当）（＋5000円）" data-price="5000">
+                  <input type="radio" name="physicalSize" value="④A4光沢紙2枚分 連結用（A3サイズ相当）（＋5000円）" data-price="5000">
                   <span class="card">
-                    <span class="title">A4光沢紙2枚分 連結用</span><span class="desc">印刷する用紙サイズ（210×297mmを2枚）</span><span class="desc">A3サイズ相当 / 折りたたみ式</span><span class="price">+¥5,000</span>
+                    <span class="title">④A4光沢紙2枚分 連結用</span><span class="desc">印刷する用紙サイズ（210×297mmを2枚）</span><span class="desc">A3サイズ相当 / 折りたたみ式</span><span class="price">+¥5,000</span>
                   </span>
                 </label>
               </div>
@@ -599,6 +599,25 @@
             <label class="label">文字追加オプション（日本語のみ / 複数選択可）</label>
             <div class="grid three" id="jpAddonGrid"></div>
             <div class="help">※色はお選びいただけません。</div>
+          </div>
+
+          <div class="field hidden" id="jpAddonDetailBlock">
+            <label class="label">文字追加の詳細</label>
+
+            <div class="field hidden" id="surnameDetailField">
+              <label class="label req" for="surnameDetail">名字追加でお入れする文字</label>
+              <input id="surnameDetail" type="text" placeholder="例：みょうじ">
+            </div>
+
+            <div class="field hidden" id="groupCenterDetailField">
+              <label class="label req" for="groupCenterDetail">グループ名（中央）追加でお入れする文字</label>
+              <input id="groupCenterDetail" type="text" placeholder="例：SixTONES">
+            </div>
+
+            <div class="field hidden" id="groupTopLeftDetailField">
+              <label class="label req" for="groupTopLeftDetail">グループ名（左上）追加でお入れする文字</label>
+              <input id="groupTopLeftDetail" type="text" placeholder="例：SixTONES / Feel da CITY">
+            </div>
           </div>
         </section>
 
@@ -1298,6 +1317,21 @@
 
       $("#jpAddonBlock").classList.toggle("hidden", language !== "日本語");
 
+      const jpAddonChecks = $$('input[name="jpAddon"]');
+      const showSurnameDetail = language === "日本語" && jpAddonChecks.some(el => el.dataset.key === "surname" && el.checked);
+      const showGroupCenterDetail = language === "日本語" && jpAddonChecks.some(el => el.dataset.key === "groupCenter" && el.checked);
+      const showGroupTopLeftDetail = language === "日本語" && jpAddonChecks.some(el => el.dataset.key === "groupTopLeft" && el.checked);
+      const showJPAddonDetail = showSurnameDetail || showGroupCenterDetail || showGroupTopLeftDetail;
+
+      $("#jpAddonDetailBlock").classList.toggle("hidden", !showJPAddonDetail);
+      $("#surnameDetailField").classList.toggle("hidden", !showSurnameDetail);
+      $("#groupCenterDetailField").classList.toggle("hidden", !showGroupCenterDetail);
+      $("#groupTopLeftDetailField").classList.toggle("hidden", !showGroupTopLeftDetail);
+
+      if(!showSurnameDetail) $("#surnameDetail").value = "";
+      if(!showGroupCenterDetail) $("#groupCenterDetail").value = "";
+      if(!showGroupTopLeftDetail) $("#groupTopLeftDetail").value = "";
+
       // fringe color fields by base
       const fringeCount = BASE_FRINGE_COUNT[baseCode] || 1;
       $$(".fringe-field").forEach(field => {
@@ -1546,6 +1580,16 @@
           total += jpAddonPrice;
           items.push({label:"文字追加オプション", value:jpAddonValues.join(" / "), price:jpAddonPrice});
         }
+
+        if(jpAddonValues.some(v => v.startsWith("名字")) && $("#surnameDetail").value.trim()){
+          items.push({label:"名字追加でお入れする文字", value:$("#surnameDetail").value.trim(), price:0});
+        }
+        if(jpAddonValues.some(v => v.startsWith("グループ名（中央）")) && $("#groupCenterDetail").value.trim()){
+          items.push({label:"グループ名（中央）追加でお入れする文字", value:$("#groupCenterDetail").value.trim(), price:0});
+        }
+        if(jpAddonValues.some(v => v.startsWith("グループ名（左上）")) && $("#groupTopLeftDetail").value.trim()){
+          items.push({label:"グループ名（左上）追加でお入れする文字", value:$("#groupTopLeftDetail").value.trim(), price:0});
+        }
       }
 
       total += getCheckedPrice("texture");
@@ -1587,6 +1631,9 @@
           },
           edgeColor: $("#edgeColor").value.trim(),
           illustrationDetail: $("#illustrationDetail").value.trim(),
+          surnameDetail: $("#surnameDetail").value.trim(),
+          groupCenterDetail: $("#groupCenterDetail").value.trim(),
+          groupTopLeftDetail: $("#groupTopLeftDetail").value.trim(),
           memo: $("#memo").value.trim()
         }
       };
@@ -1605,6 +1652,10 @@
       }
       if(state.baseCode === "thickOuter" && state.edgeDecorValues.length && !state.form.edgeColor) missing.push("フチ装飾のお色");
       if(state.finishValues.some(v => v.startsWith("イラスト")) && !state.form.illustrationDetail) missing.push("イラストの詳細");
+      const jpAddons = getCheckedValues("jpAddon");
+      if(state.language === "日本語" && jpAddons.some(v => v.startsWith("名字")) && !state.form.surnameDetail) missing.push("名字追加でお入れする文字");
+      if(state.language === "日本語" && jpAddons.some(v => v.startsWith("グループ名（中央）")) && !state.form.groupCenterDetail) missing.push("グループ名（中央）追加でお入れする文字");
+      if(state.language === "日本語" && jpAddons.some(v => v.startsWith("グループ名（左上）")) && !state.form.groupTopLeftDetail) missing.push("グループ名（左上）追加でお入れする文字");
       if(state.confirmation.length < 4) missing.push("確認事項");
       return missing;
     }
@@ -1678,6 +1729,15 @@
       if(state.language === "日本語"){
         const jpAddons = getCheckedValues("jpAddon");
         lines.push(`文字追加オプション：${jpAddons.length ? jpAddons.join(" / ") : "なし"}`);
+        if(jpAddons.some(v => v.startsWith("名字"))){
+          lines.push(`名字追加でお入れする文字：${state.form.surnameDetail || "未入力"}`);
+        }
+        if(jpAddons.some(v => v.startsWith("グループ名（中央）"))){
+          lines.push(`グループ名（中央）追加でお入れする文字：${state.form.groupCenterDetail || "未入力"}`);
+        }
+        if(jpAddons.some(v => v.startsWith("グループ名（左上）"))){
+          lines.push(`グループ名（左上）追加でお入れする文字：${state.form.groupTopLeftDetail || "未入力"}`);
+        }
       }
 
       lines.push("");
