@@ -414,7 +414,7 @@
                 <input type="radio" name="orderType" value="data" checked>
                 <span class="card">
                   <span class="title">オーダー購入【データでのお渡し】</span>
-                  <span class="price">基本料金 ¥3,000</span>
+                  <span class="price">基本料金 ¥1,500</span>
                 </span>
               </label>
               <label class="choice">
@@ -467,27 +467,27 @@
               <label class="label req">サイズ</label>
               <div class="grid">
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="①L判1/2サイズ（おおよそ名刺サイズ相当）（＋1500円）" data-price="1500" checked>
+                  <input type="radio" name="physicalSize" value="①L版1/2サイズ 2枚セット（おおよそ名刺サイズ相当）（＋800円）" data-price="800" checked>
                   <span class="card">
-                    <span class="title">①L判1/2サイズ</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="desc">おおよそ名刺サイズ相当</span><span class="price">+¥1,500</span>
+                    <span class="title">①L版1/2サイズ 2枚セット</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="desc">おおよそ名刺サイズ相当</span><span class="price">+¥800</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="②L判写真用紙（＋1500円）" data-price="1500">
+                  <input type="radio" name="physicalSize" value="②L版写真用紙（＋800円）" data-price="800">
                   <span class="card">
-                    <span class="title">②L判写真用紙</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="price">+¥1,500</span>
+                    <span class="title">②L版写真用紙</span><span class="desc">印刷する用紙サイズ（89×127mm）</span><span class="price">+¥800</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="③A4光沢紙（＋3000円）" data-price="3000">
+                  <input type="radio" name="physicalSize" value="③A4光沢紙（＋1500円）" data-price="1500">
                   <span class="card">
-                    <span class="title">③A4光沢紙</span><span class="desc">印刷する用紙サイズ（210×297mm）</span><span class="price">+¥3,000</span>
+                    <span class="title">③A4光沢紙</span><span class="desc">印刷する用紙サイズ（210×297mm）</span><span class="price">+¥1,500</span>
                   </span>
                 </label>
                 <label class="choice">
-                  <input type="radio" name="physicalSize" value="④A4光沢紙2枚分 連結用（A3サイズ相当）（＋5000円）" data-price="5000">
+                  <input type="radio" name="physicalSize" value="④A4光沢紙2枚分 連結用（A3サイズ相当）（＋2500円）" data-price="2500">
                   <span class="card">
-                    <span class="title">④A4光沢紙2枚分 連結用</span><span class="desc">印刷する用紙サイズ（210×297mmを2枚）</span><span class="desc">A3サイズ相当 / 折りたたみ式</span><span class="price">+¥5,000</span>
+                    <span class="title">④A4光沢紙2枚分 連結用</span><span class="desc">印刷する用紙サイズ（210×297mmを2枚）</span><span class="desc">A3サイズ相当 / 折りたたみ式</span><span class="desc">カット＋ラミネート付き（光沢orマット選択可）</span><span class="price">+¥2,500</span>
                   </span>
                 </label>
               </div>
@@ -497,20 +497,32 @@
               <label class="label req">追加オプション</label>
               <div class="grid">
                 <label class="choice">
-                  <input type="radio" name="physicalFinish" value="不要（用紙のみのお渡し）（＋0円）" data-price="0" checked>
+                  <input type="radio" name="physicalFinish" value="ラミネートのみ（光沢タイプ）（＋100円）" data-price="100" data-finish-mode="regular">
+                  <span class="card"><span class="title">ラミネートのみ（光沢タイプ）</span><span class="desc">表面がつるつるしており、仕上がりが綺麗に見えやすいです</span><span class="price">+¥100</span></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="physicalFinish" value="ラミネートのみ（マットタイプ）（＋200円）" data-price="200" data-finish-mode="regular">
+                  <span class="card"><span class="title">ラミネートのみ（マットタイプ）</span><span class="desc">光の反射を抑えたい方におすすめです</span><span class="price">+¥200</span></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="physicalFinish" value="カット＋ラミネートセット（光沢タイプ）（＋400円）" data-price="400" data-finish-mode="regular">
+                  <span class="card"><span class="title">カット＋ラミネートセット（光沢タイプ）</span><span class="desc">到着後すぐ使いたい方におすすめです</span><span class="price">+¥400</span></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="physicalFinish" value="カット＋ラミネートセット（マットタイプ）（＋500円）" data-price="500" data-finish-mode="regular">
+                  <span class="card"><span class="title">カット＋ラミネートセット（マットタイプ）</span><span class="desc">到着後すぐ使いたい方におすすめです</span><span class="price">+¥500</span></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="physicalFinish" value="不要（用紙のみのお渡し）（＋0円）" data-price="0" data-finish-mode="regular" checked>
                   <span class="card"><span class="title">不要（用紙のみのお渡し）</span><span class="price">+¥0</span></span>
                 </label>
-                <label class="choice">
-                  <input type="radio" name="physicalFinish" value="ラミネートのみ（光沢タイプ）（＋300円）" data-price="300">
-                  <span class="card"><span class="title">ラミネートのみ（光沢タイプ）</span><span class="desc">表面がつるつるしており、仕上がりが綺麗に見えやすいです</span><span class="price">+¥300</span></span>
+                <label class="choice hidden">
+                  <input type="radio" name="physicalFinish" value="光沢タイプ（＋0円）" data-price="0" data-finish-mode="large">
+                  <span class="card"><span class="title">光沢タイプ</span><span class="desc">カット＋ラミネート付き</span><span class="price">+¥0</span></span>
                 </label>
-                <label class="choice">
-                  <input type="radio" name="physicalFinish" value="ラミネートのみ（マットタイプ）（＋500円）" data-price="500">
-                  <span class="card"><span class="title">ラミネートのみ（マットタイプ）</span><span class="desc">光の反射を抑えたい方におすすめです</span><span class="price">+¥500</span></span>
-                </label>
-                <label class="choice">
-                  <input type="radio" name="physicalFinish" value="カット＋ラミネートセット（マットタイプ）（＋1200円）" data-price="1200">
-                  <span class="card"><span class="title">カット＋ラミネートセット（マットタイプ）</span><span class="desc">光の反射を抑えたい方におすすめです<br>※カットは手作業です</span><span class="price">+¥1,200</span></span>
+                <label class="choice hidden">
+                  <input type="radio" name="physicalFinish" value="マットタイプ（＋0円）" data-price="0" data-finish-mode="large">
+                  <span class="card"><span class="title">マットタイプ</span><span class="desc">カット＋ラミネート付き</span><span class="price">+¥0</span></span>
                 </label>
               </div>
             </div>
@@ -716,8 +728,8 @@
                 <span class="card"><span class="title">掲載OK</span><span class="price">+¥0</span></span>
               </label>
               <label class="choice">
-                <input type="radio" name="snsPermit" value="掲載NG（+¥1000）" data-price="1000">
-                <span class="card"><span class="title">掲載NG</span><span class="price">+¥1000</span></span>
+                <input type="radio" name="snsPermit" value="掲載NG（+¥500）" data-price="500">
+                <span class="card"><span class="title">掲載NG</span><span class="price">+¥500</span></span>
               </label>
             </div>
           </div>
@@ -835,16 +847,16 @@
   </div>
 
   <script>
-    const ORDER_TYPE_PRICE = { data:3000, physical:0, gift:0 };
+    const ORDER_TYPE_PRICE = { data:1500, physical:0, gift:0 };
 
     const TYPE_OPTIONS = {
       "日本語": [
         { value:"通常タイプ【なまえ型】（＋0円）", price:0, imageBase:"jp-type-normal" },
-        { value:"フルネームタイプ【名字名前型】（＋1000円）", price:1000, imageBase:"jp-type-fullname" }
+        { value:"フルネームタイプ【名字名前型】（＋500円）", price:500, imageBase:"jp-type-fullname" }
       ],
       "韓国語（ハングル）": [
         { value:"通常タイプ【이름】（＋0円）", price:0, imageBase:"kr-type-normal" },
-        { value:"フルネームタイプ【성 이름】（＋1000円）", price:1000, imageBase:"kr-type-fullname" }
+        { value:"フルネームタイプ【성 이름】（＋500円）", price:500, imageBase:"kr-type-fullname" }
       ],
       "英語": [
         { value:"通常タイプ【NAME】（＋0円）", price:0, imageBase:"en-type-normal" }
@@ -896,10 +908,10 @@
     const BASE_OPTIONS = [
       { value:"シンプル（＋0円）", price:0, code:"simple", imageBaseMap:{ "日本語":"jp-base-simple", "韓国語（ハングル）":"kr-base-simple", "英語":"en-base-simple" } },
       { value:"ノーマル（＋100円）", price:100, code:"normal", imageBaseMap:{ "日本語":"jp-base-normal", "韓国語（ハングル）":"kr-base-normal", "英語":"en-base-normal" } },
-      { value:"太フチ（内側）（＋200円）", price:200, code:"thickInner", imageBaseMap:{ "日本語":"jp-base-thick-inner", "韓国語（ハングル）":"kr-base-thick-inner", "英語":"en-base-thick-inner" } },
-      { value:"太フチ（外側）（＋300円）", price:300, code:"thickOuter", imageBaseMap:{ "日本語":"jp-base-thick-outer", "韓国語（ハングル）":"kr-base-thick-outer", "英語":"en-base-thick-outer" } },
-      { value:"フチ1本追加（＋400円）", price:400, code:"extra1", imageBaseMap:{ "日本語":"jp-base-extra1", "韓国語（ハングル）":"kr-base-extra1", "英語":"en-base-extra1" } },
-      { value:"フチ2本追加（＋500円）", price:500, code:"extra2", imageBaseMap:{ "日本語":"jp-base-extra2", "韓国語（ハングル）":"kr-base-extra2", "英語":"en-base-extra2" } }
+      { value:"太フチ（内側）（＋100円）", price:100, code:"thickInner", imageBaseMap:{ "日本語":"jp-base-thick-inner", "韓国語（ハングル）":"kr-base-thick-inner", "英語":"en-base-thick-inner" } },
+      { value:"太フチ（外側）（＋100円）", price:100, code:"thickOuter", imageBaseMap:{ "日本語":"jp-base-thick-outer", "韓国語（ハングル）":"kr-base-thick-outer", "英語":"en-base-thick-outer" } },
+      { value:"フチ1本追加（＋200円）", price:200, code:"extra1", imageBaseMap:{ "日本語":"jp-base-extra1", "韓国語（ハングル）":"kr-base-extra1", "英語":"en-base-extra1" } },
+      { value:"フチ2本追加（＋300円）", price:300, code:"extra2", imageBaseMap:{ "日本語":"jp-base-extra2", "韓国語（ハングル）":"kr-base-extra2", "英語":"en-base-extra2" } }
     ];
 
     const BASE_FRINGE_COUNT = {
@@ -913,22 +925,22 @@
 
     const EDGE_DECOR_OPTIONS = [
       { value:"フチ装飾なし（＋0円）", price:0, group:"none", imageBaseMap:{ "日本語":"jp-edge-none", "韓国語（ハングル）":"kr-edge-none", "英語":"en-edge-none" } },
-      { value:"フチ装飾 星（＋200円）", price:200, group:"decor", imageBaseMap:{ "日本語":"jp-edge-star", "韓国語（ハングル）":"kr-edge-star", "英語":"en-edge-star" } },
-      { value:"フチ装飾 雲（＋200円）", price:200, group:"decor", imageBaseMap:{ "日本語":"jp-edge-cloud", "韓国語（ハングル）":"kr-edge-cloud", "英語":"en-edge-cloud" } },
-      { value:"フチ装飾 キラキラ（＋200円）", price:200, group:"decor", imageBaseMap:{ "日本語":"jp-edge-sparkle", "韓国語（ハングル）":"kr-edge-sparkle", "英語":"en-edge-sparkle" } },
-      { value:"フチ装飾 ハート（＋200円）", price:200, group:"decor", imageBaseMap:{ "日本語":"jp-edge-heart", "韓国語（ハングル）":"kr-edge-heart", "英語":"en-edge-heart" } },
-      { value:"フチ装飾 ハート2倍（＋300円）", price:300, group:"decor", imageBaseMap:{ "日本語":"jp-edge-heart-double", "韓国語（ハングル）":"kr-edge-heart-double", "英語":"en-edge-heart-double" } }
+      { value:"フチ装飾 星（＋100円）", price:100, group:"decor", imageBaseMap:{ "日本語":"jp-edge-star", "韓国語（ハングル）":"kr-edge-star", "英語":"en-edge-star" } },
+      { value:"フチ装飾 雲（＋100円）", price:100, group:"decor", imageBaseMap:{ "日本語":"jp-edge-cloud", "韓国語（ハングル）":"kr-edge-cloud", "英語":"en-edge-cloud" } },
+      { value:"フチ装飾 キラキラ（＋100円）", price:100, group:"decor", imageBaseMap:{ "日本語":"jp-edge-sparkle", "韓国語（ハングル）":"kr-edge-sparkle", "英語":"en-edge-sparkle" } },
+      { value:"フチ装飾 ハート（＋100円）", price:100, group:"decor", imageBaseMap:{ "日本語":"jp-edge-heart", "韓国語（ハングル）":"kr-edge-heart", "英語":"en-edge-heart" } },
+      { value:"フチ装飾 ハート2倍（＋200円）", price:200, group:"decor", imageBaseMap:{ "日本語":"jp-edge-heart-double", "韓国語（ハングル）":"kr-edge-heart-double", "英語":"en-edge-heart-double" } }
     ];
 
     const FINISH_OPTIONS = [
       { value:"追加なし（＋0円）", price:0, key:"finishNone", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"none", imageBaseMap:{ "日本語":"jp-finish-none", "韓国語（ハングル）":"kr-finish-none", "英語":"en-finish-none" } },
       { value:"白フチふわもこ（＋0円）", price:0, key:"whiteFluffy", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-white-fluffy", "韓国語（ハングル）":"kr-finish-white-fluffy", "英語":"en-finish-white-fluffy" } },
-      { value:"文字グラデーション（＋200円）", price:200, key:"textGradient", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-text-gradient", "韓国語（ハングル）":"kr-finish-text-gradient", "英語":"en-finish-text-gradient" } },
-      { value:"フチ①グラデーション（＋200円）", price:200, key:"fringe1Gradient", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", fringeNo:1, imageBaseMap:{ "日本語":"jp-finish-fringe1-gradient", "韓国語（ハングル）":"kr-finish-fringe1-gradient", "英語":"en-finish-fringe1-gradient" } },
-      { value:"フチ②グラデーション（＋200円）", price:200, key:"fringe2Gradient", allowed:["normal","thickInner","thickOuter","extra1","extra2"], group:"finish", fringeNo:2, imageBaseMap:{ "日本語":"jp-finish-fringe2-gradient", "韓国語（ハングル）":"kr-finish-fringe2-gradient", "英語":"en-finish-fringe2-gradient" } },
-      { value:"フチ③グラデーション（＋200円）", price:200, key:"fringe3Gradient", allowed:["extra1","extra2"], group:"finish", fringeNo:3, imageBaseMap:{ "日本語":"jp-finish-fringe3-gradient", "韓国語（ハングル）":"kr-finish-fringe3-gradient", "英語":"en-finish-fringe3-gradient" } },
-      { value:"フチ④グラデーション（＋200円）", price:200, key:"fringe4Gradient", allowed:["extra2"], group:"finish", fringeNo:4, imageBaseMap:{ "日本語":"jp-finish-fringe4-gradient", "韓国語（ハングル）":"kr-finish-fringe4-gradient", "英語":"en-finish-fringe4-gradient" } },
-      { value:"キルティング（フチ最外層）（＋500円）", price:500, key:"quilting", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-quilting", "韓国語（ハングル）":"kr-finish-quilting", "英語":"en-finish-quilting" } },
+      { value:"文字グラデーション（＋100円）", price:100, key:"textGradient", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-text-gradient", "韓国語（ハングル）":"kr-finish-text-gradient", "英語":"en-finish-text-gradient" } },
+      { value:"フチ①グラデーション（＋100円）", price:100, key:"fringe1Gradient", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", fringeNo:1, imageBaseMap:{ "日本語":"jp-finish-fringe1-gradient", "韓国語（ハングル）":"kr-finish-fringe1-gradient", "英語":"en-finish-fringe1-gradient" } },
+      { value:"フチ②グラデーション（＋100円）", price:100, key:"fringe2Gradient", allowed:["normal","thickInner","thickOuter","extra1","extra2"], group:"finish", fringeNo:2, imageBaseMap:{ "日本語":"jp-finish-fringe2-gradient", "韓国語（ハングル）":"kr-finish-fringe2-gradient", "英語":"en-finish-fringe2-gradient" } },
+      { value:"フチ③グラデーション（＋100円）", price:100, key:"fringe3Gradient", allowed:["extra1","extra2"], group:"finish", fringeNo:3, imageBaseMap:{ "日本語":"jp-finish-fringe3-gradient", "韓国語（ハングル）":"kr-finish-fringe3-gradient", "英語":"en-finish-fringe3-gradient" } },
+      { value:"フチ④グラデーション（＋100円）", price:100, key:"fringe4Gradient", allowed:["extra2"], group:"finish", fringeNo:4, imageBaseMap:{ "日本語":"jp-finish-fringe4-gradient", "韓国語（ハングル）":"kr-finish-fringe4-gradient", "英語":"en-finish-fringe4-gradient" } },
+      { value:"キルティング（フチ最外層）（＋300円）", price:300, key:"quilting", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish", imageBaseMap:{ "日本語":"jp-finish-quilting", "韓国語（ハングル）":"kr-finish-quilting", "英語":"en-finish-quilting" } },
       { value:"イラスト", price:0, priceLabel:"1点100円～", key:"illustration", allowed:["simple","normal","thickInner","thickOuter","extra1","extra2"], group:"finish" }
     ];
 
@@ -1308,6 +1320,23 @@
 
       $("#orderScheduleBlock").classList.toggle("hidden", orderType === "gift");
       $("#physicalBlock").classList.toggle("hidden", orderType !== "physical");
+
+      const physicalSize = getCheckedValue("physicalSize");
+      const isLargePhysical = orderType === "physical" && physicalSize.includes("A4光沢紙2枚分");
+      $$('input[name="physicalFinish"]').forEach(input => {
+        const mode = input.dataset.finishMode || "regular";
+        const visible = isLargePhysical ? mode === "large" : mode !== "large";
+        const label = input.closest(".choice");
+        if(label) label.classList.toggle("hidden", !visible);
+        if(!visible) input.checked = false;
+      });
+      const visiblePhysicalFinish = $$('input[name="physicalFinish"]').filter(input => {
+        const label = input.closest(".choice");
+        return label && !label.classList.contains("hidden");
+      });
+      if(orderType === "physical" && visiblePhysicalFinish.length && !visiblePhysicalFinish.some(input => input.checked)){
+        visiblePhysicalFinish[0].checked = true;
+      }
 
       const showEdge = baseCode === "thickOuter";
       $("#edgeDecorationSection").classList.toggle("hidden", !showEdge);
